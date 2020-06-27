@@ -35,7 +35,7 @@ tags:
 
 - 思路
 
-  使用`HashMap`作为缓冲区存储出现过的值，若遇到的值已出现过，则删除。使用了虚拟头结点
+  使用`HashSet`作为缓冲区存储出现过的值，若遇到的值已出现过，则删除。使用了虚拟头结点
 
 - 代码实现
 
@@ -50,26 +50,24 @@ tags:
    */
   class Solution {
       public ListNode removeDuplicateNodes(ListNode head) {
-          if (head == null){
-              return null;
-          }
-          //使用HashSet更好
-          Map map = new HashMap();
+          Set<Integer> set = new HashSet<>();
           ListNode dummyHead = new ListNode(-1);
-          dummyHead.next=head;
-          ListNode prev = dummyHead;
-          while (prev.next!=null){
-              if (!map.containsKey(prev.next.val)){
-                  map.put(prev.next.val,1);
-                  prev = prev.next;
-              }else {
-                  prev.next = prev.next.next;
+          dummyHead.next = head;
+          ListNode pre = dummyHead;
+          ListNode cur = head;
+          while(cur!=null){
+              if(set.contains(cur.val)){
+                  pre.next = cur.next;
+                  cur = cur.next;
+              }else{
+                  set.add(cur.val);
+                  pre = cur;
+                  cur = cur.next;
               }
           }
           return dummyHead.next;
-  
       }
   }
   ```
-
+  
   
