@@ -92,6 +92,16 @@ class Solution {
         }
         return pre;
     }
+    //递归方式反转链表
+    private ListNode reverse(ListNode head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode reverseNode = reverse(head.next);
+        head.next.next = head;
+        head.next = null;
+        return reverseNode;
+    }
 }
 ```
 
