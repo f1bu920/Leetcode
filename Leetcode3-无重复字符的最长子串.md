@@ -73,3 +73,23 @@ class Solution {
 }
 ```
 
+```java
+    public int maxLength (int[] arr) {
+        // write code here
+        if(arr.length < 2){
+            return arr.length;
+        }
+        int maxSize = 1;
+        Map<Integer, Integer> map = new HashMap();
+        int left = -1;
+        for(int right = 0;right < arr.length;right++){
+            if(map.containsKey(arr[right])){
+                left = Math.max(left, map.get(arr[right]));
+            }
+            maxSize = Math.max(maxSize, right - left);
+            map.put(arr[right], right);
+        }
+        return maxSize;
+    }
+```
+
