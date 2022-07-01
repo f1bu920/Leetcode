@@ -77,7 +77,8 @@ class Solution {
         }
         return dummyHead.next;
     }
-    //反转边表
+    //反转链表
+    
     private ListNode reverseListNode(ListNode head) {
         if (head == null) {
             return null;
