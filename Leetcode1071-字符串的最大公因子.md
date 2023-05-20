@@ -43,6 +43,14 @@ tags:
 > 1 <= str2.length <= 1000
 > str1[i] 和 str2[i] 为大写英文字母
 
+---
+
+- 方法一：枚举
+
+从后往前遍历最大字串`[0,i]`，遇到符合条件的即为最大公因子串；
+
+优化：如果存在公因子串，则`str1`是`m`个子串重复，`str2`是`n`个子串重复，因此`m+n`个子串和`n+m`个子串是一样的，即`(str1+str2).equals(str2+str1)`则代表有解。
+
 ```java
 class Solution {
     public String gcdOfStrings(String str1, String str2) {
@@ -78,6 +86,30 @@ class Solution {
             }
         }
         return "";
+    }
+}
+```
+
+---
+
+- 方法二：辗转相除法
+
+确定有解后，最大解即为`len1`和`len2`的最大公约数
+
+```java
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        if (!(str1+str2).equals(str2+str1)){
+            return "";
+        }
+        return str1.substring(0,gcd(str1.length(),str2.length()));
+    }
+    // 求最大公约数
+    public int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
     }
 }
 ```
